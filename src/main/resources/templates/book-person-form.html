@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assign Book form</title>
+</head>
+<body>
+<h1>The Assign Book form</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.status.value}"></td>
+    </tr>
+    </tbody>
+</table>
+<div th:if="${book.status == T(org.exarkun.acs_lab2.entities.BookStatus).NOT_AVAILABLE}">
+    <span>The book owner is: </span><b><span th:text="${book.person.fullName}"></span></b>
+    <form th:action="@{/book/{id}/release(id=${book.id})}" th:method="PATCH" >
+        <input type="submit" value="Release book"/>
+    </form>
+</div>
+<div th:if="${book.status == T(org.exarkun.acs_lab2.entities.BookStatus).AVAILABLE}">
+    <span>This book is free. Who should I assign it to?</span>
+    <form th:action="@{/book/{id}/assign(id=${book.id})}" th:object="${owner}" th:method="PATCH" >
+        <label for="owner">Select owner</label>
+        <select th:field="*{id}" id="owner">
+            <option th:each="person : ${people}" th:value="${person.id}" th:text="${person.fullName}"></option>
+        </select>
+        <input type="submit" value="Assign book"/>
+    </form>
+</div>
+<form action="/book/get-all" th:method="GET">
+    <input type="submit" value="Back to book list">
+</form>
+</body>
+</html>

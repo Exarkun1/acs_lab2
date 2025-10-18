@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>People page</title>
+</head>
+<body>
+<h1>The Person page</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Full Name</th>
+        <th>Year of birth</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person : ${people}">
+        <td th:text="${person.id}"></td>
+        <td th:text="${person.fullName}"></td>
+        <td th:text="${person.yearOfBirth}"></td>
+        <td th:text="${person.email}"></td>
+        <td>
+            <form th:action="@{/person/{id}/edit(id=${person.id})}" th:method="GET" style="display: inline">
+                <input type="submit" value="Edit">
+            </form>
+            <form th:action="@{/person/{id}/delete(id=${person.id})}" th:method="DELETE" style="display: inline">
+                <input type="submit" value="Delete">
+            </form>
+            <form th:action="@{/book/get-all}" th:method="GET" style="display: inline">
+                <input type="hidden" name="person-id" th:value="${person.id}">
+                <input type="submit" value="Books">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<form action="/person/insert" th:method="GET">
+    <input type="submit" value="Add person">
+</form>
+<form action="/hello" th:method="GET">
+    <input type="submit" value="Back to menu">
+</form>
+</body>
+</html>
