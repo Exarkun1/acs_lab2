@@ -40,6 +40,9 @@
                 <form action="/api/person/get-null" method="GET">
                     <input type="submit" value="Add person"/>
                 </form>
+                <form action="/api/book/get-all" method="GET">
+                    <input type="submit" value="To books list"/>
+                </form>
                 <script src="/../js/person.js"/>
             </body>
         </html>

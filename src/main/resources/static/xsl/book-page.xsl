@@ -16,6 +16,9 @@
                     </tr>
                     <xsl:for-each select="books/*">
                         <tr>
+                            <xsl:if test="status='Not available'">
+                                <xsl:attribute name="style">color: red;</xsl:attribute>
+                            </xsl:if>
                             <td><xsl:value-of select="id"/></td>
                             <td><xsl:value-of select="title"/></td>
                             <td><xsl:value-of select="author"/></td>
@@ -35,6 +38,9 @@
                 </table>
                 <form action="/api/book/get-null" method="GET">
                     <input type="submit" value="Add book"/>
+                </form>
+                <form action="/api/person/get-all" method="GET">
+                    <input type="submit" value="To people list"/>
                 </form>
                 <script src="/../js/book.js"/>
             </body>

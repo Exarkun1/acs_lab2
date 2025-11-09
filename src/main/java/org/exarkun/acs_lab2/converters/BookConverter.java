@@ -20,11 +20,12 @@ public class BookConverter {
 
     public BookDto convertToDto(Book book) {
         Person person = book.getPerson();
+        BookStatus status = book.getStatus();
         return new BookDto(
                 book.getId(),
                 book.getTitle(),
                 book.getAuthor(),
-                book.getStatus().getValue(),
+                (status != null ? status.getValue() : BookStatus.AVAILABLE.getValue()),
                 (person != null ? person.getId() : null)
         );
     }
