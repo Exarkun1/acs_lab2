@@ -9,6 +9,7 @@
 <form action="/book/save" th:method="POST" th:object="${book}">
     <input type="hidden" th:field="*{id}">
     <input type="hidden" th:field="*{status}">
+    <input type="hidden" th:field="*{person}">
     <label for="title">Title:</label>
     <input id="title" type="text" th:field="*{title}"><br/>
     <label for="author">Author:</label>
