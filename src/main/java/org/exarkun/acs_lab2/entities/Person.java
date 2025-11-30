@@ -3,11 +3,13 @@ package org.exarkun.acs_lab2.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.exarkun.acs_lab2.log.PersonLogger;
 
 import java.util.List;
 
 @Entity
 @Table(name = "person")
+@EntityListeners(PersonLogger.class)
 @Setter @Getter
 public class Person {
 
